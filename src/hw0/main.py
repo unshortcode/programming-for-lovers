@@ -1,5 +1,6 @@
 # Implement a function Permutation()
 from email._header_value_parser import Value
+import time
 def Permutation(n: int, k: int) -> int:
     """
     Give n and k, calculate the Permutation statistic P(n, k)
@@ -119,8 +120,41 @@ def sum_proper_divisors(n: int) -> int:
             divisors.append(i)
     return sum(divisors)
 
+# Implement a function SumProperDivisorsOptimize()
+def sum_proper_divisors_op(n: int) -> int:
+    if n < 0:
+        raise ValueError
+    if n <= 1: 
+        return 0  # ước 1 là chính nó nên phải bỏ đi
+    total = 1  # tính sẵn với ước là 1
+    for i in range(2, int(n ** 0.5) + 1):  # bỏ đi số 1, và chỉ đi tới căn bậc 2 của n + 1 
+        if n % i == 0:
+            k = n // i  # cặp số đối n = k * i
+            if i == k:  # Số chính phương
+                total += i
+            else:
+                total += i
+                total += k
+    return total
+
 def main():
-    print(power(10, 5), power_recursion(10, 5))
-    
+    x = 10**5
+    # timing sum_proper_divisors
+    start = time.time()
+    sum_proper_divisors(x)
+    elapsed_trivial = time.time() - start
+    print(f"sum_proper_divisors took {elapsed_trivial:.6f} seconds")
+
+    # timing sum_proper_divisors_op
+    start = time.time()
+    sum_proper_divisors_op(x)
+    elapsed_euclid = time.time() - start
+    print(f"sum_proper_divisors_op took {elapsed_euclid:.6f} seconds")
+
+    # compute and print speedup
+    if elapsed_euclid > 0:
+        speedup = elapsed_trivial / elapsed_euclid
+        print(f"Speedup: {speedup:.2f}x faster")
+
 if __name__ == "__main__":
     main()
