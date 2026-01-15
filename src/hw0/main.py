@@ -96,6 +96,29 @@ def power_divine(a: int, b: int):
         # Nếu b lẻ: a * (a^(b/2)) * (a^(b/2))
         return a * half_power * half_power
 
+# Implement a function SumProperDivisors()
+def sum_proper_divisors(n: int) -> int:
+    """
+    Return the sum of all proper (positive) divisors of n, i.e., divisors strictly less than n.
+    
+    Args:
+        n: Integer input.
+    
+    Returns:
+        The sum of all positive divisors of n that are < n.
+        Returns 0 for n <= 1.
+    """
+    if n < 1:
+        raise ValueError
+    elif n == 1:
+        return 0
+    
+    divisors = []
+    for i in range(1, n):
+        if n % i == 0:
+            divisors.append(i)
+    return sum(divisors)
+
 def main():
     print(power(10, 5), power_recursion(10, 5))
     
