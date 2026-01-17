@@ -137,24 +137,34 @@ def sum_proper_divisors_op(n: int) -> int:
                 total += k
     return total
 
+# Implement a function GCDArray()
+def gcd_array(a: list[int]) -> int:
+    """
+    Return the greatest common divisor (GCD) of all integers in the list.
+    
+    Args:
+        a: A non-empty list of integers (values may be negative or zero).
+    
+    Returns:
+        The non-negative GCD of all numbers in `a`. 
+    """
+    if not a:
+        return ValueError
+    m = a[0]
+    for val in a[1:]:
+        m = gcd(m, val)
+        if m == 1:
+            return 1
+    return m
+
+def gcd(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    while b:
+        a, b = b, a % b
+    return a
+
 def main():
-    x = 10**5
-    # timing sum_proper_divisors
-    start = time.time()
-    sum_proper_divisors(x)
-    elapsed_trivial = time.time() - start
-    print(f"sum_proper_divisors took {elapsed_trivial:.6f} seconds")
-
-    # timing sum_proper_divisors_op
-    start = time.time()
-    sum_proper_divisors_op(x)
-    elapsed_euclid = time.time() - start
-    print(f"sum_proper_divisors_op took {elapsed_euclid:.6f} seconds")
-
-    # compute and print speedup
-    if elapsed_euclid > 0:
-        speedup = elapsed_trivial / elapsed_euclid
-        print(f"Speedup: {speedup:.2f}x faster")
+    print()
 
 if __name__ == "__main__":
     main()
