@@ -285,8 +285,30 @@ def permutation_op(n: int, k: int) -> int:
         p *= (n - i)
     return p
 
+def combination_op(n: int, k: int) -> int:
+    """
+    Compute the combination statistic C(n, k) = n! / ((n - k)! * k!) efficiently.
+    Args:
+        n: Total number of distinct objects (non-negative integer).
+        k: Size of the subset to choose (non-negative integer).
+    Returns:
+        The number of ways to choose k items from n without order.
+    """
+    if k < 0 or k > n:
+        return ValueError
+    if k in (0, n):   # Tương tự `k == 0 or k == n`
+        return 1
+
+    if k > n // 2:    # Tính đối xứng C(n , k) = C(n, n - k)
+        k = n - k
+
+    p = 1
+    for i in range(k):
+        p = p * (n - i) // (i + 1)
+    return p
+
 def main():
-    print(amicable_pairs(10000))
+    print(combination_op(1000, 998))
 
 if __name__ == "__main__":
     main()
