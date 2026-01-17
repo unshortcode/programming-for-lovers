@@ -246,14 +246,48 @@ def next_twin_primes(n: int) -> tuple[int, int]:
     if p < 3:
         return (3, 5)
     if p % 2 == 0: # p phải là số lẻ
-        p += 1    
+        p += 1
     while True:
         if is_prime(p) and is_prime(p + 2):
             return p, p + 2
         p += 2
 
+# Tìm các cặp số bạn bè 
+def is_amicable(a: int, b: int) -> bool:
+    """
+    a có phải là tổng của các ước của b và ngược lại
+
+    Args:
+    - a: int
+    - b: int
+
+    Results:
+    bool
+    """
+    return a == sum_proper_divisors_op(b) and b == sum_proper_divisors_op(a)
+
+def amicable_pairs(n: int) -> list[(int, int)]:
+    """
+    Liệt kê các cặp số bạn bè bé hơn n
+
+    Arg:
+    - n: int
+
+    Result:
+    List các cặp số bạn bè
+    """
+    amicable_list = []
+    for a in range(220, n):
+        b = sum_proper_divisors_op(a)
+        if b < n:
+            if sum_proper_divisors_op(b) == a and b > a:
+                amicable_list.append((a, b))
+    return amicable_list
+        
+
+
 def main():
-    print()
+    print(amicable_pairs(10000))
 
 if __name__ == "__main__":
     main()
