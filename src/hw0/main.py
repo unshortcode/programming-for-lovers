@@ -176,6 +176,45 @@ def is_perfect(n: int) -> bool:
         return False
     return n == sum_proper_divisors_op(n)
 
+# Implement a function NextPerfectNumber()
+def next_perfect_number(n: int) -> int:
+    """
+    Return the smallest perfect number strictly greater than n.
+    Args:
+        n: Integer threshold.
+    Returns:
+        The least perfect number > n.
+    """
+    a = n + 1 # Ngay sau n
+    while not is_perfect(a):
+        a += 1
+    return a
+
+def next_perfect_number_op(n: int) -> int:
+    p = 2
+    while True:
+        if is_prime(p):
+            mersenne = 2 ** p -1
+
+            if is_prime(mersenne):
+                perfect_number = (2 ** (p - 1)) * mersenne
+                if perfect_number > n:
+                    return perfect_number
+        p += 1
+
+def is_prime(n: int) -> bool:
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    
+    for i in range(3, int(n ** 0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
 def main():
     print()
 
