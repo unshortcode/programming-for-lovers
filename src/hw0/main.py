@@ -233,6 +233,25 @@ def list_mersenne_primes(n: int) -> list[int]:
                 prime_list.append(mersenne)
     return prime_list
 
+# Implement a function NextTwinPrimes()
+def next_twin_primes(n: int) -> tuple[int, int]:
+    """
+    Return the smallest pair of twin primes (p, p+2) such that both p and p+2 are > n.
+    Args:
+        n: Integer threshold.
+    Returns:
+        A tuple (p, q) where q = p + 2 are twin primes and p > n.
+    """
+    p = n + 1
+    if p < 3:
+        return (3, 5)
+    if p % 2 == 0: # p phải là số lẻ
+        p += 1    
+    while True:
+        if is_prime(p) and is_prime(p + 2):
+            return p, p + 2
+        p += 2
+
 def main():
     print()
 
