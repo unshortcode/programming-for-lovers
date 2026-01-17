@@ -163,6 +163,19 @@ def gcd(a: int, b: int) -> int:
         a, b = b, a % b
     return a
 
+# Implement a function IsPerfect()
+def is_perfect(n: int) -> bool:
+    """
+    Determine whether an integer n is a perfect number.
+    Args:
+        n: Integer to test.
+    Returns:
+        True if n is perfect, False otherwise.
+    """
+    if n == 1:
+        return False
+    return n == sum_proper_divisors_op(n)
+
 def main():
     print()
 
