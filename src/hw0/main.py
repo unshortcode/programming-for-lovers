@@ -253,19 +253,6 @@ def next_twin_primes(n: int) -> tuple[int, int]:
         p += 2
 
 # Tìm các cặp số bạn bè 
-def is_amicable(a: int, b: int) -> bool:
-    """
-    a có phải là tổng của các ước của b và ngược lại
-
-    Args:
-    - a: int
-    - b: int
-
-    Results:
-    bool
-    """
-    return a == sum_proper_divisors_op(b) and b == sum_proper_divisors_op(a)
-
 def amicable_pairs(n: int) -> list[(int, int)]:
     """
     Liệt kê các cặp số bạn bè bé hơn n
@@ -283,8 +270,20 @@ def amicable_pairs(n: int) -> list[(int, int)]:
             if sum_proper_divisors_op(b) == a and b > a:
                 amicable_list.append((a, b))
     return amicable_list
-        
 
+def permutation_op(n: int, k: int) -> int:
+    """
+    Compute the permutation statistic P(n, k) = n · (n-1) · ... · (n-k+1) = n! / (n-k)!.
+    Args:
+        n: Total number of distinct objects (non-negative integer).
+        k: Number of positions to fill (non-negative integer).
+    Returns:
+        The number of ways to choose and order k items from n.
+    """
+    p = 1
+    for i in range(k):
+        p *= (n - i)
+    return p
 
 def main():
     print(amicable_pairs(10000))
