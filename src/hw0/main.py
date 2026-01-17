@@ -215,6 +215,24 @@ def is_prime(n: int) -> bool:
             return False
     return True
 
+# Implement a function ListMersennePrimes()
+def list_mersenne_primes(n: int) -> list[int]:
+    """
+    List all Mersenne primes of the form 2^p - 1 with p ≤ n.
+    Args:
+        n: Upper bound on the exponent p (non-negative integer).
+    Returns:
+        A list of all primes of the form 2^p - 1 where p is prime and p ≤ n,
+        in increasing order of p.
+    """
+    prime_list = []
+    for p in range(2, n + 1):
+        if is_prime(p):
+            mersenne = 2 ** p - 1
+            if is_prime(mersenne):
+                prime_list.append(mersenne)
+    return prime_list
+
 def main():
     print()
 
