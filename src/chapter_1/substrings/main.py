@@ -33,7 +33,7 @@ def frequency_table(text: str, k: int) -> dict[str, int]:
     """
     n = len(text)
     table = {}
-    for i in range(i:n-k+1):
+    for i in range(n-k+1):
         kmer = text[i:i+k]    
         if kmer in table:             # table[kmer] = table.get(kmer, 0) + 1
             table[kmer] += 1
